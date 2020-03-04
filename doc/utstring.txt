@@ -1,7 +1,7 @@
 utstring: dynamic string macros for C
 =====================================
 Troy D. Hanson <tdh@tkhanson.net>
-v2.0.2, March 2017
+v2.1.0, December 2018
 
 Here's a link back to the https://github.com/troydhanson/uthash[GitHub project page].
 
@@ -225,5 +225,15 @@ Note that the internal `_utstring_find` has the length of the UT_string as its
 second argument, rather than the start position. You can emulate the position
 parameter by adding to the string start address and subtracting from its length.
 
-// vim: set nowrap syntax=asciidoc:
+Notes
+~~~~~
 
+1. To override the default out-of-memory handling behavior (which calls `exit(-1)`),
+   override the `utstring_oom()` macro before including `utstring.h`.
+   For example,
+
+  #define utstring_oom() do { longjmp(error_handling_location); } while (0)
+  ...
+  #include "utstring.h"
+
+// vim: set nowrap syntax=asciidoc:
